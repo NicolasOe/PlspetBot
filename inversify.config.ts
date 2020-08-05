@@ -4,7 +4,7 @@ import { TYPES } from "./src/types";
 import { Bot } from "./src/bot";
 import { Client } from "discord.js";
 import { DogeMessageResponder } from "./src/services/doge/doge-message-responder";
-import { PingFinder } from "./src/services/ping-finder";
+import { PingFinder } from "./src/services/doge/ping-finder";
 
 let container = new Container();
 

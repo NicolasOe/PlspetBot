@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import 'mocha';
 import { expect } from 'chai';
-import { PingFinder } from "../src/services/ping-finder";
+import { PingFinder } from "../src/services/doge/ping-finder";
 import { DogeMessageResponder } from "../src/services/doge/doge-message-responder";
 import { instance, mock, verify, when } from "ts-mockito";
 import { Message } from "discord.js";
