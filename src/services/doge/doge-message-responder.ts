@@ -6,20 +6,20 @@ import { MessageResponder } from "../../data-model/message-responder";
 
 @injectable()
 export class DogeMessageResponder extends MessageResponder {
-    private pingFinder: PingFinder;
+  private pingFinder: PingFinder;
 
-    constructor(
-        @inject(TYPES.PingFinder) pingFinder: PingFinder
-    ) {
-        super();
-        this.pingFinder = pingFinder;
+  constructor(
+    @inject(TYPES.PingFinder) pingFinder: PingFinder
+  ) {
+    super();
+    this.pingFinder = pingFinder;
+  }
+
+  handleMessage(message: Message): Promise<Message | Message[]> {
+    if (this.pingFinder.isPing(message.content)) {
+      return message.reply('No ping, no');
     }
 
-    handleMessage(message: Message): Promise<Message | Message[]> {
-        if (this.pingFinder.isPing(message.content)) {
-            return message.reply('No ping, just pet');
-        }
-
-        return Promise.reject();
-    }
+    return Promise.reject();
+  }
 }

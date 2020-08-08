@@ -5,12 +5,12 @@ import { MessageResponder } from "../../data-model/message-responder";
 @injectable()
 export class ShowdownMessageResponder extends MessageResponder {
 
-    constructor(
-    ) {
-        super();
-    }
+  constructor(
+  ) {
+    super();
+  }
 
-    handleMessage(message: Message): Promise<Message | Message[]> {
-        return message.reply('I\'m Showdown and I\`m kinda working lol');
-    }
+  handleMessage(message: Message): Promise<Message | Message[]> {
+    return message.reply('I\'m Showdown and I\`m kinda working lol');
+  }
 }
