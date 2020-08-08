@@ -1,55 +1,24 @@
 import "reflect-metadata";
-import 'mocha';
-import { expect } from 'chai';
-import { PingFinder } from "../src/services/doge/ping-finder";
+import "mocha";
 import { DogeMessageResponder } from "../src/services/doge/doge-message-responder";
 import { instance, mock, verify, when } from "ts-mockito";
 import { Message } from "discord.js";
+import { PetPingAction } from "../src/services/doge/actions/pet-ping-action";
 
 describe('MessageResponder', () => {
-    let mockedPingFinderClass: PingFinder;
-    let mockedPingFinderInstance: PingFinder;
+    let mockedPetPingActionClass: PetPingAction;
+    let mockedPetPingActionInstance: PetPingAction;
     let mockedMessageClass: Message;
     let mockedMessageInstance: Message;
 
     let service: DogeMessageResponder;
 
     beforeEach(() => {
-        mockedPingFinderClass = mock(PingFinder);
-        mockedPingFinderInstance = instance(mockedPingFinderClass);
+        mockedPetPingActionClass = mock(PetPingAction);
+        mockedPetPingActionInstance = instance(mockedPetPingActionClass);
         mockedMessageClass = mock(Message);
         mockedMessageInstance = instance(mockedMessageClass);
-        setMessageContents();
 
-        service = new DogeMessageResponder(mockedPingFinderInstance);
+        service = new DogeMessageResponder(mockedPetPingActionInstance);
     })
-
-    it('should reply No ping, just pet', async () => {
-        whenIsPingThenReturn(true);
-
-        await service.handleMessage(mockedMessageInstance);
-
-        verify(mockedMessageClass.reply('No ping, just pet')).once();
-    })
-
-    it('should not reply No ping, just pet', async () => {
-        whenIsPingThenReturn(false);
-
-        await service.handleMessage(mockedMessageInstance).then(() => {
-            // Successful promise is unexpected, so we fail the test
-            expect.fail('Unexpected promise');
-        }).catch(() => {
-            // Rejected promise is expected, so nothing happens here
-        });
-
-        verify(mockedMessageClass.reply('No ping, just pet')).never();
-    })
-
-    function setMessageContents() {
-        mockedMessageInstance.content = "Non-empty string";
-    }
-
-    function whenIsPingThenReturn(result: boolean) {
-        when(mockedPingFinderClass.isPing("Non-empty string")).thenReturn(result);
-    }
 });
