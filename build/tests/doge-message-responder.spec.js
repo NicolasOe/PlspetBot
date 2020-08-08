@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 require("mocha");
 const chai_1 = require("chai");
-const ping_finder_1 = require("../src/services/ping-finder");
+const ping_finder_1 = require("../src/services/doge/ping-finder");
 const doge_message_responder_1 = require("../src/services/doge/doge-message-responder");
 const ts_mockito_1 = require("ts-mockito");
 const discord_js_1 = require("discord.js");

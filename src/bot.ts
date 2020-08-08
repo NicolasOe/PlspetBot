@@ -7,14 +7,17 @@ import { DogeMessageResponder } from "./services/doge/doge-message-responder";
 export class Bot {
     private client: Client;
     private readonly token: string;
+    private readonly username: string;
     private messageResponder: DogeMessageResponder;
 
     constructor(
         @inject(TYPES.Client) client: Client,
+        @inject(TYPES.Username) username: string,
         @inject(TYPES.Token) token: string,
         @inject(TYPES.DogeMessageResponder) messageResponder: DogeMessageResponder) {
         this.client = client;
         this.token = token;
+        this.username = username;
         this.messageResponder = messageResponder;
     }
 
@@ -24,13 +27,20 @@ export class Bot {
                 console.log('Ignoring bot message!')
                 return;
             }
+            if (!this.username) {
+                console.log('Please update your .env file with a new value USER=[your username here] to proceed');
+                return
+            }
 
             console.log("Message received! Contents: ", message.content);
 
-            this.messageResponder.handleMessage(message).then(() => {
-                console.log("Response sent!");
-            }).catch(() => {
-                console.log("Response not sent.")
+
+            message.reply('[' + this.username + ']\n').then(() => {
+                this.messageResponder.handleMessage(message).then(() => {
+                    console.log("Response sent!");
+                }).catch(() => {
+                    console.log("Response not sent.")
+                })
             })
         });
 

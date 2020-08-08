@@ -18,9 +18,10 @@ const inversify_1 = require("inversify");
 const types_1 = require("./types");
 const doge_message_responder_1 = require("./services/doge/doge-message-responder");
 let Bot = class Bot {
-    constructor(client, token, messageResponder) {
+    constructor(client, username, token, messageResponder) {
         this.client = client;
         this.token = token;
+        this.username = username;
         this.messageResponder = messageResponder;
     }
     listen() {
@@ -29,11 +30,17 @@ let Bot = class Bot {
                 console.log('Ignoring bot message!');
                 return;
             }
+            if (!this.username) {
+                console.log('Please update your .env file with a new value USER=[your username here] to proceed');
+                return;
+            }
             console.log("Message received! Contents: ", message.content);
-            this.messageResponder.handleMessage(message).then(() => {
-                console.log("Response sent!");
-            }).catch(() => {
-                console.log("Response not sent.");
+            message.reply('[' + this.username + ']\n').then(() => {
+                this.messageResponder.handleMessage(message).then(() => {
+                    console.log("Response sent!");
+                }).catch(() => {
+                    console.log("Response not sent.");
+                });
             });
         });
         return this.client.login(this.token);
@@ -42,9 +49,10 @@ let Bot = class Bot {
 Bot = __decorate([
     inversify_1.injectable(),
     __param(0, inversify_1.inject(types_1.TYPES.Client)),
-    __param(1, inversify_1.inject(types_1.TYPES.Token)),
-    __param(2, inversify_1.inject(types_1.TYPES.DogeMessageResponder)),
-    __metadata("design:paramtypes", [discord_js_1.Client, String, doge_message_responder_1.DogeMessageResponder])
+    __param(1, inversify_1.inject(types_1.TYPES.Username)),
+    __param(2, inversify_1.inject(types_1.TYPES.Token)),
+    __param(3, inversify_1.inject(types_1.TYPES.DogeMessageResponder)),
+    __metadata("design:paramtypes", [discord_js_1.Client, String, String, doge_message_responder_1.DogeMessageResponder])
 ], Bot);
 exports.Bot = Bot;
 //# sourceMappingURL=bot.js.map

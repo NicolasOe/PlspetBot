@@ -4,5 +4,6 @@ export const TYPES = {
     DogeMessageResponder: Symbol("DogeMessageResponder"),
     PingFinder: Symbol("PingFinder"),
     ShowdownMessageResponder: Symbol("ShowdownMessageResponder"),
-    Token: Symbol("Token")
+    Token: Symbol("Token"),
+    Username: Symbol("Username")
 };
