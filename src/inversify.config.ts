@@ -1,14 +1,14 @@
 import "reflect-metadata";
 import { Container } from "inversify";
-import { TYPES } from "./src/types";
-import { Bot } from "./src/bot";
+import { TYPES } from "./types";
 import { Client } from "discord.js";
-import { DogeMessageResponder } from "./src/services/doge/doge-message-responder";
-import { PingFinder } from "./src/services/doge/ping-finder";
+import { DogeMessageResponder } from "./services/doge/doge-message-responder";
+import { PingFinder } from "./services/doge/ping-finder";
+import { DogeBot } from "./services/doge/doge-bot";
 
 let container = new Container();
 
-container.bind<Bot>(TYPES.Bot).to(Bot).inSingletonScope();
+container.bind<DogeBot>(TYPES.DogeBot).to(DogeBot).inSingletonScope();
 container.bind<Client>(TYPES.Client).toConstantValue(new Client());
 container.bind<string>(TYPES.Token).toConstantValue(process.env.TOKEN);
 container.bind<DogeMessageResponder>(TYPES.DogeMessageResponder).to(DogeMessageResponder).inSingletonScope();

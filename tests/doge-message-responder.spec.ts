@@ -5,7 +5,7 @@ import { instance, mock, verify, when } from "ts-mockito";
 import { Message } from "discord.js";
 import { PetPingAction } from "../src/services/doge/actions/pet-ping-action";
 
-describe('MessageResponder', () => {
+describe("MessageResponder", () => {
     let mockedPetPingActionClass: PetPingAction;
     let mockedPetPingActionInstance: PetPingAction;
     let mockedMessageClass: Message;

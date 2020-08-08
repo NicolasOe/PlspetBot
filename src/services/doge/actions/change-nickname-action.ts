@@ -2,8 +2,8 @@ import { Message } from "discord.js";
 import { User } from "discord.js";
 import { Utils } from "../utils";
 import { inject, injectable } from "inversify";
-import { Action } from '../../../data-model/action';
-import { ActionParams } from '../../../data-model/action';
+import { Action } from "../../../data-model/action";
+import { ActionParams } from "../../../data-model/action";
 
 @injectable()
 export class ChangeNicknameAction extends Action {
@@ -14,8 +14,8 @@ export class ChangeNicknameAction extends Action {
     }
     let userReference = match[1];
     let user = null;
-    if (userReference === 'me') {
-        user = message.author;
+    if (userReference === "me") {
+      user = message.author;
     } else {
       let mentionedUsers = Utils.getMentionedUsers(message);
       if (mentionedUsers.length === 1) {
@@ -28,23 +28,23 @@ export class ChangeNicknameAction extends Action {
     }
 
     return [true,
-        new ChangeNicknameActionParams(user, match[2], userReference === 'me')];
+      new ChangeNicknameActionParams(user, match[2], userReference === "me")];
   }
 
   run(message: Message, params: ChangeNicknameActionParams):
-      Promise<Message | Message[]> {
-    if (params.user.username === 'NicolasOe') {
-      return message.reply((params.isSelfChange ? 'vc' : 'ele') + ' nao');
+    Promise<Message | Message[]> {
+    if (params.user.username === "NicolasOe") {
+      return message.reply((params.isSelfChange ? "vc" : "ele") + " nao");
     } else {
       message.guild.members.fetch(params.user.id).then(
-          member => member.setNickname(params.newNickname));
+        member => member.setNickname(params.newNickname));
       if (params.isSelfChange) {
-        return message.reply('okay ' + params.newNickname);
+        return message.reply("okay " + params.newNickname);
       } else {
         return message.channel.send(
-            Utils.getUserMentionFromId(params.user.id)
-            + ', ' + Utils.getUserMentionFromId(message.author.id)
-            + ' changed your name');
+          Utils.getUserMentionFromId(params.user.id)
+          + ", " + Utils.getUserMentionFromId(message.author.id)
+          + " changed your name");
       }
     }
   }

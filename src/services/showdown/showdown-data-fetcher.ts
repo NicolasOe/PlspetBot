@@ -5,13 +5,13 @@ import { DataFetcher } from "../../data-model/data-fetcher";
 @injectable()
 export class ShowdownDataFetcher extends DataFetcher {
 
-    constructor(
-    ) {
-        super();
-    }
+  constructor(
+  ) {
+    super();
+  }
 
-    handle(message: Message): Promise<Message | Message[]> {
+  handle(message: Message): Promise<Message | Message[]> {
 
-        return Promise.reject();
-    }
+    return Promise.reject();
+  }
 }
