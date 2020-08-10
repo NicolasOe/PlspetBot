@@ -18,7 +18,5 @@ describe("MessageResponder", () => {
         mockedPetPingActionInstance = instance(mockedPetPingActionClass);
         mockedMessageClass = mock(Message);
         mockedMessageInstance = instance(mockedMessageClass);
-
-        service = new DogeMessageResponder(mockedPetPingActionInstance);
     })
 });
