@@ -3,7 +3,7 @@ import { Snowflake } from 'discord.js';
 import { User } from 'discord.js';
 
 export class Utils {
-	static checkBotMention(message: Message): boolean {
+    static checkBotMention(message: Message): boolean {
         for (var [id, user] of message.mentions.users) {
             if (user.username === 'plspet bot') {
                 return true;
@@ -24,10 +24,10 @@ export class Utils {
     }
 
     static random(max: number): number {
-    	return Math.floor(Math.random() * max)
+        return Math.floor(Math.random() * max);
     }
 
     static getUserMentionFromId(id: Snowflake): string {
-    	return '<@' + id + '>';
+        return '<@' + id + '>';
     }
 }

@@ -7,6 +7,7 @@ import { PingFinder } from "./services/doge/ping-finder";
 import { DogeBot } from "./services/doge/doge-bot";
 import { PetPingAction } from "./services/doge/actions/pet-ping-action";
 import { ChouchaExampleAction } from "./services/doge/actions/choucha-example-action";
+import { Taboo } from "./services/doge/taboo";
 
 let container = new Container();
 
@@ -17,5 +18,6 @@ container.bind<DogeMessageResponder>(TYPES.DogeMessageResponder).to(DogeMessageR
 container.bind<PingFinder>(TYPES.PingFinder).to(PingFinder).inSingletonScope();
 container.bind<PetPingAction>(TYPES.PetPingAction).to(PetPingAction).inSingletonScope();
 container.bind<ChouchaExampleAction>(TYPES.ChouchaExampleAction).to(ChouchaExampleAction).inSingletonScope();
+container.bind<Taboo>(TYPES.Taboo).to(Taboo).inSingletonScope();
 
 export default container;
