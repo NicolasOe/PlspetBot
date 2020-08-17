@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "npm run copy-assets && tsc -p tsconfig.json -w",
     "start": "node build/src/index.js",
     "watch": "tsc -p tsconfig.json -w",
-    "test": "mocha -r ts-node/register \"tests/**/*.spec.ts\""
+    "test": "mocha -r ts-node/register \"tests/**/*.spec.ts\"",
+    "copy-assets": "mkdir -p build/src/res && cp -rv src/res/** build/src/res/"
   },
   "author": "",
   "license": "ISC",
@@ -15,12 +17,17 @@
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "eslint": "^7.6.0",
+    "fs": "0.0.1-security",
     "inversify": "^5.0.1",
+    "readline": "^1.3.0",
     "reflect-metadata": "^0.1.13",
     "typescript": "^3.9.7"
   },
   "compilerOptions": {
-    "outDir": "build"
+    "outDir": "build",
+    "assets": [
+      "src/res/**/*"
+    ]
   },
   "devDependencies": {
     "@types/chai": "^4.2.12",
